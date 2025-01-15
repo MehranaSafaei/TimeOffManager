@@ -1,4 +1,10 @@
 package org.example.entity;
 
-public class Leave {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "leaves")
+public class Leave  extends AbstractLeave{
+
 }

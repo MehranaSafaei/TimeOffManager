@@ -1,4 +1,9 @@
 package org.example.entity;
 
-public class Personnel {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "personnels")
+public class Personnel extends AbstractPersonnel{
 }
