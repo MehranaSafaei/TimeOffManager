@@ -1,5 +1,6 @@
 package org.example.entity.dto;
 
+import jakarta.validation.constraints.Pattern;
 import org.example.entity.Leave;
 
 import java.util.Set;
@@ -7,20 +8,12 @@ import java.util.Set;
 public class PersonnelDTO {
 
     private Long id;
+    @Pattern(regexp = "gg")
     private String username;
     private String password;
     private String personnelCode;
     private String email;
-    private Set<Leave> leaves;
-
-    public PersonnelDTO(Long id, String username, String password, String personnelCode, String email, Set<Leave> leaves) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.personnelCode = personnelCode;
-        this.email = email;
-        this.leaves = leaves;
-    }
+    private Set<LeaveDTO> leaves;
 
     public Long getId() {
         return id;
@@ -62,11 +55,11 @@ public class PersonnelDTO {
         this.email = email;
     }
 
-    public Set<Leave> getLeaves() {
+    public Set<LeaveDTO> getLeaves() {
         return leaves;
     }
 
-    public void setLeaves(Set<Leave> leaves) {
+    public void setLeaves(Set<LeaveDTO> leaves) {
         this.leaves = leaves;
     }
 }
