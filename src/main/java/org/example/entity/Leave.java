@@ -7,4 +7,5 @@ import jakarta.persistence.Table;
 @Table(name = "leaves")
 public class Leave  extends AbstractLeave{
 
+    
 }
