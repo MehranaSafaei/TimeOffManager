@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import javax.management.relation.Role;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,8 +18,12 @@ public class AbstractPersonnel {
     private Long id;
 
     @Size(max = 50)
-    @Column(name = "Name", unique = true)
-    private String username;
+    @Column(name = "First_Name", unique = true)
+    private String firstName;
+
+    @Size(max = 50)
+    @Column(name = "Last_Name", unique = true)
+    private String lastName;
 
     @Size(max = 50)
     @Column(name = "Password", unique = true, nullable = false, updatable = true)
@@ -26,7 +31,12 @@ public class AbstractPersonnel {
 
     @Size(max = 20)
     @Column(name = "PersonnelCode", unique = true, nullable = false)
-    private String personnelCode;
+    private Long personnelCode;
+
+    @Size(max = 15)
+    @Column(name = "Mobile", unique = true, nullable = false)
+    private String mobile;
+//    private Set<Role> roles;
 
     @Size(max = 50)
     @Column(name = "Email")
@@ -46,12 +56,20 @@ public class AbstractPersonnel {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -62,12 +80,19 @@ public class AbstractPersonnel {
         this.password = password;
     }
 
-    public String getPersonnelCode() {
+    public Long getPersonnelCode() {
         return personnelCode;
     }
 
-    public void setPersonnelCode(String personnelCode) {
+    public void setPersonnelCode(Long personnelCode) {
         this.personnelCode = personnelCode;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {
@@ -90,9 +115,11 @@ public class AbstractPersonnel {
     public String toString() {
         return "AbstractPersonnel{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", personnelCode='" + personnelCode + '\'' +
+                ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
                 ", leaves=" + leaves +
                 '}';
@@ -102,12 +129,11 @@ public class AbstractPersonnel {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPersonnel that = (AbstractPersonnel) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(personnelCode, that.personnelCode) && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves);
+        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(password, that.password) && Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, personnelCode, email, leaves);
+        return Objects.hash(id, firstName, lastName, password, personnelCode, mobile, email, leaves);
     }
-
 }
