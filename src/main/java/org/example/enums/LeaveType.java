@@ -1,4 +1,4 @@
-package org.example.entity.enums;
+package org.example.enums;
 
 public enum LeaveType {
     PENDING,

@@ -1,11 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import org.example.entity.enums.LeaveType;
+import org.example.enums.LeaveType;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 @MappedSuperclass
 public class AbstractLeave {

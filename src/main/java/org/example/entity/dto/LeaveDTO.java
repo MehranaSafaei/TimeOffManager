@@ -1,7 +1,6 @@
 package org.example.entity.dto;
 
-import org.example.entity.Personnel;
-import org.example.entity.enums.LeaveType;
+import org.example.enums.LeaveType;
 
 import java.time.LocalDate;
 

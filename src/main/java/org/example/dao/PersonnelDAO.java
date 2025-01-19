@@ -8,14 +8,13 @@ import org.example.mapper.DtoMapper;
 public class PersonnelDAO {
 
     private EntityManager entityManager;
-    private DtoMapper mapper;
 
     public PersonnelDAO() {}
 
-    public Personnel createPersonnel(PersonnelDTO personnelDTO) {
-        Personnel personnel = mapper.personnel(personnelDTO);
+    public PersonnelDTO createPersonnel(PersonnelDTO personnelDTO) {
+        Personnel personnel = DtoMapper.personnel(personnelDTO);
         entityManager.persist(personnel);
-        return mapper.personnelDTO(personnel);
+        return DtoMapper.personnelDTO(personnel);
     }
 
 //    public PersonnelDTO createPersonnel(PersonnelDTO personnel) {

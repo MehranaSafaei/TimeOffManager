@@ -1,7 +1,6 @@
 package org.example.entity.dto;
 
 import jakarta.validation.constraints.Pattern;
-import org.example.entity.Leave;
 
 import java.util.Set;
 
