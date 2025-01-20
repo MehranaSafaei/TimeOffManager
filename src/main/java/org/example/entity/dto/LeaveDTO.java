@@ -9,7 +9,7 @@ public class LeaveDTO {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private PersonnelDTO personnel;
+    private PersonnelDTO personnelId;
     private LeaveType leaveType;
 
     public Long getId() {
@@ -36,12 +36,12 @@ public class LeaveDTO {
         this.endDate = endDate;
     }
 
-    public PersonnelDTO getPersonnel() {
-        return personnel;
+    public PersonnelDTO getPersonnelId() {
+        return personnelId;
     }
 
-    public void setPersonnel(PersonnelDTO personnel) {
-        this.personnel = personnel;
+    public void setPersonnelId(PersonnelDTO personnelId) {
+        this.personnelId = personnelId;
     }
 
     public LeaveType getLeaveType() {

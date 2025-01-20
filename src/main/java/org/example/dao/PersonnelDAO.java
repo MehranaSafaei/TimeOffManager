@@ -1,6 +1,9 @@
 package org.example.dao;
 
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.example.controller.request.CreateRequestDto;
 import org.example.entity.Personnel;
 import org.example.entity.dto.PersonnelDTO;
@@ -9,9 +12,9 @@ import org.example.mapper.DtoMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class PersonnelDAO {
 
+    @Inject
     private EntityManager entityManager;
 
     public PersonnelDAO() {}
@@ -19,9 +22,10 @@ public class PersonnelDAO {
     public PersonnelDTO createPersonnel(CreateRequestDto createRequest) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(DtoMapper.personnel(createRequest));
+            Personnel personnel = DtoMapper.personnel(createRequest);
+            entityManager.persist(personnel);
             entityManager.getTransaction().commit();
-
+            return DtoMapper.personnelDTO(personnel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,7 +38,7 @@ public class PersonnelDAO {
 
     public List<PersonnelDTO> getAllPersonnel() {
        try {
-           List<Personnel> personnelList = entityManager.createNamedQuery("Personnel.findAll").getResultList();
+           List<Personnel> personnelList = entityManager.createNamedQuery("selectAll").getResultList();
            return personnelList.stream()
 //                 .map(personnel -> DtoMapper.personnelDTO(personnel))
                    .map(DtoMapper :: personnelDTO)
@@ -44,6 +48,8 @@ public class PersonnelDAO {
        }
        return null;
     }
+
+
 
 
 

@@ -23,7 +23,7 @@ public class PersonnelDTO {
     @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")
     private String email;
 
-    private Set<LeaveDTO> leaves;
+    private Set<LeaveDTO> leaveId;
 
     public Long getId() {
         return id;
@@ -73,11 +73,11 @@ public class PersonnelDTO {
         this.email = email;
     }
 
-    public Set<LeaveDTO> getLeaves() {
-        return leaves;
+    public Set<LeaveDTO> getLeaveId() {
+        return leaveId;
     }
 
-    public void setLeaves(Set<LeaveDTO> leaves) {
-        this.leaves = leaves;
+    public void setLeaveId(Set<LeaveDTO> leaveId) {
+        this.leaveId = leaveId;
     }
 }
