@@ -12,8 +12,9 @@ public class PersonnelService {
     public PersonnelService(PersonnelDAO personnelDAO) {}
 
 
-    public PersonnelDTO createPersonnel(CreateRequestDto createRequest) {  //is problem for enter (PersonnelDTO personnelDTO)
-        return personnelDAO.createPersonnel(createRequest);
+    public PersonnelDTO createPersonnel(CreateRequestDto createRequest) {//is problem for enter (PersonnelDTO personnelDTO)
+        //call the build object method
+        return personnelDAO.createPersonnel(person);
     }
 
     public PersonnelDTO getPersonnelById(Long id) {
@@ -23,4 +24,10 @@ public class PersonnelService {
     public List<PersonnelDTO> getAllPersonnel() {
         return personnelDAO.getAllPersonnel();
     }
+
+    //TODO:canSave-canDelete-canEdit
+
+    //TODO:mapper builder-->Object personel
+
+
 }

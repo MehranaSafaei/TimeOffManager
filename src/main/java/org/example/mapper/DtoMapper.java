@@ -1,6 +1,7 @@
 package org.example.mapper;
 
 import org.example.controller.request.CreateRequestDto;
+import org.example.controller.request.RequestDto;
 import org.example.entity.Leave;
 import org.example.entity.Personnel;
 import org.example.entity.dto.LeaveDTO;
@@ -46,14 +47,14 @@ public class DtoMapper {
         return leaveDTO;
     }
 
-    public static Leave leave(LeaveDTO leaveDTO) {
-        if (leaveDTO == null) {
+    public static Leave leave(RequestDto requestDto) {
+        if (requestDto == null) {
             return null;
         }
         Leave leave = new Leave();
-        leave.setId(leaveDTO.getId());
-        leave.setStartDate(leaveDTO.getStartDate());
-        leave.setEndDate(leaveDTO.getEndDate());
+        leave.setId(requestDto.getId());
+        leave.setStartDate(requestDto.getStartDate());
+        leave.setEndDate(requestDto.getEndDate());
         return leave;
     }
 }

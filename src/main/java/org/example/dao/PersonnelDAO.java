@@ -19,30 +19,30 @@ public class PersonnelDAO {
 
     public PersonnelDAO() {}
 
-    public PersonnelDTO createPersonnel(CreateRequestDto createRequest) {
+    public void createPersonnel(Personnel personnel) {
         try {
             entityManager.getTransaction().begin();
-            Personnel personnel = DtoMapper.personnel(createRequest);
             entityManager.persist(personnel);
             entityManager.getTransaction().commit();
-            return DtoMapper.personnelDTO(personnel);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public PersonnelDTO getPersonnelById(Long id) {
-        return DtoMapper.personnelDTO(entityManager.find(Personnel.class, id));
+    public Personnel getPersonnelById(Long id) {
+        Personnel personnel = null;
+        try {
+            personnel = entityManager.find(Personnel.class, id);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return personnel;
     }
 
-    public List<PersonnelDTO> getAllPersonnel() {
+    public List<Personnel> getAllPersonnel() {
        try {
            List<Personnel> personnelList = entityManager.createNamedQuery("selectAll").getResultList();
-           return personnelList.stream()
-//                 .map(personnel -> DtoMapper.personnelDTO(personnel))
-                   .map(DtoMapper :: personnelDTO)
-                   .collect(Collectors.toList());
+           return personnelList;
        }catch (Exception e) {
            e.printStackTrace();
        }

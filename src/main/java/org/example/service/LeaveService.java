@@ -6,6 +6,6 @@ public class LeaveService {
 
 
     public LeaveDTO createLeave(LeaveDTO leaveDTO) {
-
+        return leaveDTO;
     }
 }
