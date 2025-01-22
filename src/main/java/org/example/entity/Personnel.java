@@ -1,11 +1,11 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "personnels")
-//@NamedQuery(query = "select p from Personnel p where p.name = :name ")
+@Table(name = "personnel")
+//@SecondaryTables({@SecondaryTable(name = "").@SecondaryTable(name = "")})
+@NamedQueries({@NamedQuery(name = "selectAll", query = "SELECT Personnel FROM Personnel"),
+@NamedQuery(name = "findById", query = "SELECT Personnel FROM Personnel WHERE Personnel.id= :id")})
 public class Personnel extends AbstractPersonnel{
 }

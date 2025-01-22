@@ -7,12 +7,23 @@ import java.util.Set;
 public class PersonnelDTO {
 
     private Long id;
-    @Pattern(regexp = "gg")
-    private String username;
+
+    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")
+    private String firstName;
+
+    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")
+    private String lastName;
+
+    @Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character")
     private String password;
-    private String personnelCode;
+
+    @Pattern(regexp = "[0-9]{5,10}$")
+    private Long personnelCode;
+
+    @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")
     private String email;
-    private Set<LeaveDTO> leaves;
+
+    private Set<LeaveDTO> leaveId;
 
     public Long getId() {
         return id;
@@ -22,12 +33,20 @@ public class PersonnelDTO {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -38,11 +57,11 @@ public class PersonnelDTO {
         this.password = password;
     }
 
-    public String getPersonnelCode() {
+    public Long getPersonnelCode() {
         return personnelCode;
     }
 
-    public void setPersonnelCode(String personnelCode) {
+    public void setPersonnelCode(Long personnelCode) {
         this.personnelCode = personnelCode;
     }
 
@@ -54,11 +73,11 @@ public class PersonnelDTO {
         this.email = email;
     }
 
-    public Set<LeaveDTO> getLeaves() {
-        return leaves;
+    public Set<LeaveDTO> getLeaveId() {
+        return leaveId;
     }
 
-    public void setLeaves(Set<LeaveDTO> leaves) {
-        this.leaves = leaves;
+    public void setLeaveId(Set<LeaveDTO> leaveId) {
+        this.leaveId = leaveId;
     }
 }

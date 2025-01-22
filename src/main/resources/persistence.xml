@@ -1,12 +1,25 @@
+<!--<persistence xmlns="http://java.sun.com/xml/ns/persistence"-->
+<!--             version="3.1.0">-->
+
+<!--    <persistence-unit name="leaveManagement">-->
+<!--        <properties>-->
+<!--            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/leave_management"/>-->
+<!--            <property name="jakarta.persistence.jdbc.user" value="root"/>-->
+<!--            <property name="jakarta.persistence.jdbc.password" value="Aa@123456"/>-->
+<!--        </properties>-->
+<!--    </persistence-unit>-->
+<!--</persistence>-->
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="3.1.0">
 
     <persistence-unit name="leaveManagement">
         <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/leave_management"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="Aa@123456"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="1234"/>
         </properties>
     </persistence-unit>
 </persistence>
+

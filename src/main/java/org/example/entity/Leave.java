@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "leaves")
+@Table(name = "leave")
 public class Leave  extends AbstractLeave{
 
     

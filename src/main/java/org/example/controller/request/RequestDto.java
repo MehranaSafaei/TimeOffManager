@@ -1,16 +1,15 @@
-package org.example.entity.dto;
+package org.example.controller.request;
 
-import org.example.enums.LeaveType;
+import org.example.entity.dto.PersonnelDTO;
 
 import java.time.LocalDate;
 
-public class LeaveDTO {
+public class RequestDto {
 
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
     private PersonnelDTO personnelId;
-    private LeaveType leaveType;
 
     public Long getId() {
         return id;
@@ -42,13 +41,5 @@ public class LeaveDTO {
 
     public void setPersonnelId(PersonnelDTO personnelId) {
         this.personnelId = personnelId;
-    }
-
-    public LeaveType getLeaveType() {
-        return leaveType;
-    }
-
-    public void setLeaveType(LeaveType leaveType) {
-        this.leaveType = leaveType;
     }
 }

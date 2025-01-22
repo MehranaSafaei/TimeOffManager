@@ -7,12 +7,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
+@IdClass(Leave.class)
 public class AbstractLeave {
 
     //TODO: field
     //TODO:ORM Hibernate-->mapping and column and generate(Table-identity-sequence)---->lazy/eager? cascade orphanRemoval insertable and updatable scale(id)?
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) // because I use postgres
     private Long id;
 
     @Column(name = "StartDate", nullable = false)
