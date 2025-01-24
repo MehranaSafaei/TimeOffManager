@@ -9,8 +9,8 @@ public class LeaveDTO {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String leaveType;
     private PersonnelDTO personnelId;
-    private LeaveType leaveType;
 
     public Long getId() {
         return id;
@@ -44,11 +44,11 @@ public class LeaveDTO {
         this.personnelId = personnelId;
     }
 
-    public LeaveType getLeaveType() {
+    public String getLeaveType() {
         return leaveType;
     }
 
     public void setLeaveType(LeaveType leaveType) {
-        this.leaveType = leaveType;
+        this.leaveType = String.valueOf(leaveType);
     }
 }

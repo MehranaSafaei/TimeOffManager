@@ -22,6 +22,8 @@ public class AbstractLeave {
     @Column(name = "EndDate", nullable = false)
     private LocalDate endDate;
 
+    private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personnel_id", foreignKey = @ForeignKey(name = "fk_personnel_leave"))
     private Personnel personnel;
@@ -57,6 +59,14 @@ public class AbstractLeave {
         this.endDate = endDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Personnel getPersonnel() {
         return personnel;
     }
@@ -79,6 +89,7 @@ public class AbstractLeave {
                 "id=" + id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", description='" + description + '\'' +
                 ", personnel=" + personnel +
                 ", leaveType=" + leaveType +
                 '}';
@@ -86,13 +97,14 @@ public class AbstractLeave {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractLeave that = (AbstractLeave) o;
-        return Objects.equals(id, that.id) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(personnel, that.personnel) && leaveType == that.leaveType;
+        return Objects.equals(id, that.id) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(description, that.description) && Objects.equals(personnel, that.personnel) && leaveType == that.leaveType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startDate, endDate, personnel, leaveType);
+        return Objects.hash(id, startDate, endDate, description, personnel, leaveType);
     }
 }

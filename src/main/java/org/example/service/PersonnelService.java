@@ -1,46 +1,45 @@
 package org.example.service;
 
-<<<<<<< HEAD
-import org.example.dao.PersonnelDAO;
-import org.example.entity.dto.PersonnelDTO;
+import jakarta.enterprise.context.RequestScoped;
+import org.example.dao.PersonnelDao;
+import org.example.entity.Personnel;
+import org.example.enums.Role;
+import jakarta.inject.Inject;
 
+import java.util.Optional;
+
+@RequestScoped
 public class PersonnelService {
 
-    private PersonnelDAO personnelDAO;
+    @Inject
+    private PersonnelDao personnelDao;
 
-     public PersonnelDTO createPersonnel(PersonnelDTO personnelDTO) {
-         return personnelDAO.createPersonnel(personnelDTO);
-     }
-=======
-import org.example.controller.request.CreateRequestDto;
-import org.example.dao.PersonnelDAO;
-import org.example.entity.dto.PersonnelDTO;
+    public Personnel createPersonnel(Personnel personnel) {
+        Personnel personnel1 = new Personnel();
+        personnel1.setUsername(personnel.getUsername());
+        personnel1.setMobile(personnel.getMobile());
+        personnel1.setEmail(personnel.getEmail());
+        personnel1.setPersonnelCode(personnel.getPersonnelCode());
+        personnel1.setRole(Role.valueOf(personnel.getRole().toString()));
 
-import java.util.List;
-
-public class PersonnelService {
-
-    private PersonnelDAO personnelDAO;
-    public PersonnelService(PersonnelDAO personnelDAO) {}
-
-
-    public PersonnelDTO createPersonnel(CreateRequestDto createRequest) {//is problem for enter (PersonnelDTO personnelDTO)
-        //call the build object method
-        return personnelDAO.createPersonnel(person);
+        return personnelDao.insert(personnel1).orElse(null);
     }
 
-    public PersonnelDTO getPersonnelById(Long id) {
-        return personnelDAO.getPersonnelById(id);
+    public Optional<Personnel> findByRole(Role role) {
+        return personnelDao.findAll().stream()
+                .filter(personnel -> personnel.getRole().equals(role))
+                .findFirst();
     }
 
-    public List<PersonnelDTO> getAllPersonnel() {
-        return personnelDAO.getAllPersonnel();
+    public Personnel getPersonnelById(Long leavePersonnelId) {
+        Optional<Personnel> personnelOptional = personnelDao.getById(leavePersonnelId);
+        return personnelOptional.orElse(null);
     }
 
-    //TODO:canSave-canDelete-canEdit
-
-    //TODO:mapper builder-->Object personel
-
-
->>>>>>> e74cd717d7efe345d80116be7a6bb409270b5f0c
+    public Personnel findPersonnelByCode(long personnelCodeForLeave) {
+        Optional<Personnel> personnelOptional = personnelDao.findAll().stream()
+                .filter(personnel -> personnel.getPersonnelCode() == personnelCodeForLeave)
+                .findFirst();
+        return personnelOptional.orElse(null);
+    }
 }
