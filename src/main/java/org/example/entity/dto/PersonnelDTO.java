@@ -8,27 +8,20 @@ import java.util.Set;
 public class PersonnelDTO {
 
     private Long id;
-
-    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")
     private String username;
-
-    @Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character")
     private String password;
-
-    @Pattern(regexp = "[0-9]{5,10}$")
     private Long personnelCode;
-
-    @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")
+    private String mobile;
     private String email;
-
     private String role;
 
 
     private Set<LeaveDTO> leaveId;
 
-    public PersonnelDTO(Long id, @Size(max = 50) String usename, String role, String email) {
+    public PersonnelDTO(Long id, @Size(max = 50) String username, String role, String mobile, String email) {
         this.id = id;
-        this.username = usename;
+        this.username = username;
+        this.mobile = mobile;
         this.email = email;
         this.role = role;
     }
@@ -36,47 +29,53 @@ public class PersonnelDTO {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long") String getUsername() {
+    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")
+    public String getUsername() {
         return username;
     }
-
-    public void setUsername(@Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long") String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public @Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character") String getPassword() {
+    @Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character")
+    public String getPassword() {
         return password;
     }
-
-    public void setPassword(@Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character") String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public @Pattern(regexp = "[0-9]{5,10}$") Long getPersonnelCode() {
+    @Pattern(regexp = "[0-9]{5,10}$")
+    public Long getPersonnelCode() {
         return personnelCode;
     }
-
-    public void setPersonnelCode(@Pattern(regexp = "[0-9]{5,10}$") Long personnelCode) {
+    public void setPersonnelCode(Long personnelCode) {
         this.personnelCode = personnelCode;
     }
 
-    public @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$") String getEmail() {
-        return email;
+    @Pattern(regexp = "[0-9]{5,10}$")
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public void setEmail(@Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$") String email) {
+    @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
         this.email = email;
     }
 
     public String getRole() {
         return role;
     }
-
     public void setRole(String role) {
         this.role = role;
     }
@@ -84,7 +83,6 @@ public class PersonnelDTO {
     public Set<LeaveDTO> getLeaveId() {
         return leaveId;
     }
-
     public void setLeaveId(Set<LeaveDTO> leaveId) {
         this.leaveId = leaveId;
     }

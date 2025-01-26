@@ -1,7 +1,10 @@
 package org.example;
 
+import jakarta.enterprise.context.RequestScoped;
 import org.example.entity.Leave;
 import org.example.entity.Personnel;
+import org.example.entity.dto.LeaveDTO;
+import org.example.entity.dto.PersonnelDTO;
 import org.example.enums.LeaveType;
 import org.example.enums.Role;
 import org.example.service.LeaveService;
@@ -9,8 +12,10 @@ import org.example.service.PersonnelService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Scanner;
 
+@RequestScoped
 public class Main {
     public static void main(String[] args) {
         PersonnelService personnelService = new PersonnelService();
@@ -35,23 +40,22 @@ public class Main {
                     String mobile = scanner.nextLine();
                     System.out.print("Enter your personnel code: ");
                     long personnelCode = scanner.nextLong();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     System.out.print("Enter your email: ");
                     String email = scanner.nextLine();
 
-                    System.out.print("Enter Role (EMPLOYEE, MANAGER, ADMIN): ");
-                    Role role = Role.valueOf(scanner.nextLine().toUpperCase());
 
                     Personnel personnel = new Personnel();
                     personnel.setUsername(userName);
                     personnel.setMobile(mobile);
                     personnel.setEmail(email);
                     personnel.setPersonnelCode(personnelCode);
-                    personnel.setRole(role);
 
-                    Personnel createdPersonnel = personnelService.createPersonnel(personnel);
+
+                    Optional<PersonnelDTO> createdPersonnel = personnelService.createPersonnel(personnel);
+                    System.out.println("Created Personnel: " + createdPersonnel.get().getUsername());
                     if (createdPersonnel != null) {
-                        System.out.println("Personnel Created: " + createdPersonnel.getUsername() + " - " + createdPersonnel.getMobile() + " - " + createdPersonnel.getPersonnelCode() + " - " + createdPersonnel.getEmail());
+                        System.out.println("Personnel Created: " + createdPersonnel.get().getUsername() + " - " + createdPersonnel.get().getMobile() + " - " + createdPersonnel.get().getPersonnelCode() + " - " + createdPersonnel.get().getEmail());
                     } else {
                         System.out.println("Personnel creation failed.");
                     }
@@ -60,7 +64,7 @@ public class Main {
                 case 2:
                     System.out.print("Enter Personnel Code to apply for leave: ");
                     long personnelCodeForLeave = scanner.nextLong();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
 
                     Personnel p = personnelService.findPersonnelByCode(personnelCodeForLeave);
                     if (p == null) {
@@ -90,12 +94,12 @@ public class Main {
                     leave.setPersonnel(p);
 //                    leave.setLoginTime(loginTime);
 
-                    Leave createdLeave = leaveService.createLeave(leave);
-                    if (createdLeave != null) {
-                        System.out.println("Leave Created: " + createdLeave.getStartDate() + " - " + createdLeave.getEndDate() + " - " + createdLeave.getDescription() + " - " + createdLeave.getLeaveType());
-                    } else {
-                        System.out.println("Leave creation failed.");
-                    }
+//                    Leave createdLeave = leaveService.createLeave(leave);
+//                    if (createdLeave != null) {
+//                        System.out.println("Leave Created: " + createdLeave.getStartDate() + " - " + createdLeave.getEndDate() + " - " + createdLeave.getDescription() + " - " + createdLeave.getLeaveType());
+//                    } else {
+//                        System.out.println("Leave creation failed.");
+//                    }
                     break;
 
                 case 3:

@@ -1,29 +1,38 @@
 package org.example.service;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import org.example.dao.PersonnelDao;
 import org.example.entity.Personnel;
+import org.example.entity.dto.PersonnelDTO;
 import org.example.enums.Role;
-import jakarta.inject.Inject;
+import org.example.mapper.DtoMapper;
 
 import java.util.Optional;
 
-@RequestScoped
+
 public class PersonnelService {
+
 
     @Inject
     private PersonnelDao personnelDao;
 
-    public Personnel createPersonnel(Personnel personnel) {
-        Personnel personnel1 = new Personnel();
-        personnel1.setUsername(personnel.getUsername());
-        personnel1.setMobile(personnel.getMobile());
-        personnel1.setEmail(personnel.getEmail());
-        personnel1.setPersonnelCode(personnel.getPersonnelCode());
-        personnel1.setRole(Role.valueOf(personnel.getRole().toString()));
+    public Optional<PersonnelDTO> createPersonnel(Personnel personnel) {
+        try {
+            if (personnelDao == null) {
+                throw new IllegalStateException("PersonnelDAO is not injected");
+            }
 
-        return personnelDao.insert(personnel1).orElse(null);
+            Personnel savedPersonnel = personnelDao.insert(personnel);
+
+            PersonnelDTO personnelDTO = DtoMapper.entityToDTO(savedPersonnel);
+
+            return Optional.of(personnelDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
+
 
     public Optional<Personnel> findByRole(Role role) {
         return personnelDao.findAll().stream()

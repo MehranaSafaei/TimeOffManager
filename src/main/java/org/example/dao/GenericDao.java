@@ -16,19 +16,19 @@ public abstract class GenericDao<T> {
         this.entityClass = entityClass;
     }
 
-    public Optional<T> insert(T entity) {
+    public T insert(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
             entityManager.persist(entity);
             transaction.commit();
-            return Optional.of(entity);
+            return entity;
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 

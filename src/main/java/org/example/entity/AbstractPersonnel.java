@@ -21,9 +21,9 @@ public class AbstractPersonnel {
     @Column(name = "Username", unique = true)
     private String username;
 
-    @Size(max = 50)
-    @Column(name = "Password", unique = true, nullable = false, updatable = true)
-    private String password;
+//    @Size(max = 50)
+//    @Column(name = "Password", unique = true, updatable = true)
+//    private String password;
 
     @Size(max = 20)
     @Column(name = "PersonnelCode", unique = true, nullable = false)
@@ -49,7 +49,6 @@ public class AbstractPersonnel {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -57,23 +56,13 @@ public class AbstractPersonnel {
     public @Size(max = 50) String getUsername() {
         return username;
     }
-
     public void setUsername(@Size(max = 50) String username) {
         this.username = username;
-    }
-
-    public @Size(max = 50) String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@Size(max = 50) String password) {
-        this.password = password;
     }
 
     public @Size(max = 20) Long getPersonnelCode() {
         return personnelCode;
     }
-
     public void setPersonnelCode(@Size(max = 20) Long personnelCode) {
         this.personnelCode = personnelCode;
     }
@@ -81,7 +70,6 @@ public class AbstractPersonnel {
     public @Size(max = 15) String getMobile() {
         return mobile;
     }
-
     public void setMobile(@Size(max = 15) String mobile) {
         this.mobile = mobile;
     }
@@ -89,7 +77,6 @@ public class AbstractPersonnel {
     public Role getRole() {
         return role;
     }
-
     public void setRole(org.example.enums.Role role) {
         this.role = role;
     }
@@ -97,7 +84,6 @@ public class AbstractPersonnel {
     public @Size(max = 50) String getEmail() {
         return email;
     }
-
     public void setEmail(@Size(max = 50) String email) {
         this.email = email;
     }
@@ -105,7 +91,6 @@ public class AbstractPersonnel {
     public Set<Leave> getLeaves() {
         return leaves;
     }
-
     public void setLeaves(Set<Leave> leaves) {
         this.leaves = leaves;
     }
@@ -115,7 +100,7 @@ public class AbstractPersonnel {
         return "AbstractPersonnel{" +
                 "id=" + id +
                 ",username='" + username + '\'' +
-                ", password='" + password + '\'' +
+//                ", password='" + password + '\'' +
                 ", personnelCode=" + personnelCode +
                 ", mobile='" + mobile + '\'' +
                 ", role=" + role +
@@ -129,11 +114,11 @@ public class AbstractPersonnel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPersonnel that = (AbstractPersonnel) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && role == that.role && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && role == that.role && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, personnelCode, mobile, role, email, leaves);
+        return Objects.hash(id, username, personnelCode, mobile, role, email, leaves);
     }
 }
