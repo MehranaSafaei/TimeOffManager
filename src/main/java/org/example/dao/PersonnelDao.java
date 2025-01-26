@@ -16,6 +16,7 @@ public class PersonnelDao extends GenericDao<Personnel> {
 //    public PersonnelDao(Class<Personnel> entityClass) {
 //        super(entityClass);
 //    }
+
     public PersonnelDao() {
         super(Personnel.class);
     }
