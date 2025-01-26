@@ -38,7 +38,6 @@ public class AbstractLeave {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -46,7 +45,6 @@ public class AbstractLeave {
     public LocalDate getStartDate() {
         return startDate;
     }
-
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
@@ -54,7 +52,6 @@ public class AbstractLeave {
     public LocalDate getEndDate() {
         return endDate;
     }
-
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
@@ -62,7 +59,6 @@ public class AbstractLeave {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -70,7 +66,6 @@ public class AbstractLeave {
     public Personnel getPersonnel() {
         return personnel;
     }
-
     public void setPersonnel(Personnel personnel) {
         this.personnel = personnel;
     }
@@ -78,7 +73,6 @@ public class AbstractLeave {
     public LeaveType getLeaveType() {
         return leaveType;
     }
-
     public void setLeaveType(LeaveType leaveType) {
         this.leaveType = leaveType;
     }

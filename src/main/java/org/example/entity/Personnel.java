@@ -9,5 +9,8 @@ import jakarta.persistence.*;
         @NamedQuery(name = "findById", query = "SELECT p FROM Personnel p WHERE p.id = :id")
 })
 public class Personnel extends AbstractPersonnel {
+
+    public Personnel() {
+    }
 }
 

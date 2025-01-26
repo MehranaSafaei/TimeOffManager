@@ -17,13 +17,13 @@ public class LeaveDao extends GenericDao<Leave> {
     public LeaveDao() {
         super(Leave.class);
     }
-
-    @Override
-    @Transactional
-    public Optional<Leave> insert(Leave entity) {
-        entityManager.persist(entity);
-        return Optional.of(entity);
-    }
+//
+//    @Override
+//    @Transactional
+//    public Optional<Leave> insert(Leave entity) {
+//        entityManager.persist(entity);
+//        return Optional.of(entity);
+//    }
 
     @Override
     @Transactional
