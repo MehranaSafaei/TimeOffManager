@@ -14,7 +14,7 @@ public class AbstractPersonnel {
 
     @Id
     @Column(name = "Id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Size(max = 50)
