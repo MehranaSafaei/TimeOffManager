@@ -1,54 +1,43 @@
 package org.example.dao;
 
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
-import org.example.entity.Personnel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.example.entity.Personnel;
 
 import java.io.Serializable;
 import java.util.List;
 
-@ApplicationScoped
+@SessionScoped
 public class PersonnelDao extends GenericDao<Personnel> implements Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-
     public PersonnelDao() {
         super(Personnel.class);
     }
 
+    public List<Personnel> findAll() {
+        try {
+            return entityManager.createNamedQuery("selectAll", Personnel.class).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
-    public void insert(Personnel entity) {
+    public Personnel insert(Personnel entity) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(entity);
-            entityManager.getTransaction().commit();
-
-        }catch (Exception e) {
-            entityManager.getTransaction().rollback();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return entity;
     }
-
-
-    public List findAll() {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.getTransaction().commit();
-            return entityManager.createNamedQuery("selectAll").getResultList();
-        }catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
+}
 
 //    public PersonnelDao() {
 //        super(Personnel.class);
@@ -84,4 +73,4 @@ public class PersonnelDao extends GenericDao<Personnel> implements Serializable 
 //    public List<Personnel> findAll() {
 //        return entityManager.createNamedQuery("selectAll").getResultList();
 //    }
-}
+

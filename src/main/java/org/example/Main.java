@@ -1,19 +1,28 @@
 package org.example;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.example.entity.Leave;
 import org.example.entity.Personnel;
+import org.example.entity.dto.PersonnelDTO;
 import org.example.enums.LeaveType;
 import org.example.service.LeaveService;
 import org.example.service.PersonnelService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Scanner;
 
+@ApplicationScoped
 public class Main {
-    public static void main(String[] args) {
-        PersonnelService personnelService = new PersonnelService();
-        LeaveService leaveService = new LeaveService();
+
+    @Inject
+    private PersonnelService personnelService;
+
+    @Inject
+    private LeaveService leaveService;
+
+    public void run() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=== Personnel and Leave Management ===");
@@ -38,53 +47,66 @@ public class Main {
                     System.out.print("Enter your email: ");
                     String email = scanner.nextLine();
 
-
                     Personnel personnel = new Personnel();
                     personnel.setUsername(userName);
                     personnel.setMobile(mobile);
                     personnel.setEmail(email);
                     personnel.setPersonnelCode(personnelCode);
 
+                    Optional<PersonnelDTO> createdPersonnel = personnelService.createPersonnel(personnel);
 
-                    personnelService.createPersonnel(personnel);
-
+                    if (createdPersonnel.isPresent()) {
+                        System.out.println("Personnel Created: " +
+                                createdPersonnel.get().getUsername() + " - " +
+                                createdPersonnel.get().getMobile() + " - " +
+                                createdPersonnel.get().getPersonnelCode() + " - " +
+                                createdPersonnel.get().getEmail());
+                    } else {
+                        System.out.println("Personnel creation failed.");
+                    }
+                    break;
 
                 case 2:
-                    System.out.print("Enter Personnel Code to apply for leave: ");
-                    long personnelCodeForLeave = scanner.nextLong();
-                    scanner.nextLine();
-
-//                    Personnel p = personnelService.findPersonnelByCode(personnelCodeForLeave);
-//                    if (p == null) {
+//                    System.out.print("Enter Personnel Code to apply for leave: ");
+//                    long personnelCodeForLeave = scanner.nextLong();
+//                    scanner.nextLine();
+//
+////                    Optional<Personnel> personnelForLeave = personnelService.findPersonnelByCode(personnelCodeForLeave);
+//
+//                    if (personnelForLeave.isEmpty()) {
 //                        System.out.println("Personnel not found.");
 //                        break;
 //                    }
-
-                    LocalDateTime loginTime = LocalDateTime.now();
-                    System.out.println("Login time: " + loginTime);
-
-                    System.out.println("Enter leave details:");
-                    System.out.print("Enter start date (YYYY-MM-DD): ");
-                    String startDate = scanner.nextLine();
-                    System.out.print("Enter end date (YYYY-MM-DD): ");
-                    String endDate = scanner.nextLine();
-                    System.out.print("Enter description: ");
-                    String description = scanner.nextLine();
-
-                    System.out.print("Enter Leave Type (ANNUAL, SICK, UNPAID, MATERNITY): ");
-                    LeaveType leaveType = LeaveType.valueOf(scanner.nextLine().toUpperCase());
-
-                    Leave leave = new Leave();
-                    leave.setStartDate(LocalDate.parse(startDate));
-                    leave.setEndDate(LocalDate.parse(endDate));
-                    leave.setDescription(description);
-                    leave.setLeaveType(leaveType);
+//
+//                    Personnel p = personnelForLeave.get();
+//                    System.out.println("Personnel found: " + p.getUsername());
+//
+//                    System.out.println("Enter leave details:");
+//                    System.out.print("Enter start date (YYYY-MM-DD): ");
+//                    String startDate = scanner.nextLine();
+//                    System.out.print("Enter end date (YYYY-MM-DD): ");
+//                    String endDate = scanner.nextLine();
+//                    System.out.print("Enter description: ");
+//                    String description = scanner.nextLine();
+//
+//                    System.out.print("Enter Leave Type (ANNUAL, SICK, UNPAID, MATERNITY): ");
+//                    LeaveType leaveType = LeaveType.valueOf(scanner.nextLine().toUpperCase());
+//
+//                    Leave leave = new Leave();
+//                    leave.setStartDate(LocalDate.parse(startDate));
+//                    leave.setEndDate(LocalDate.parse(endDate));
+//                    leave.setDescription(description);
+//                    leave.setLeaveType(leaveType);
 //                    leave.setPersonnel(p);
-//                    leave.setLoginTime(loginTime);
-
-//                    Leave createdLeave = leaveService.createLeave(leave);
-//                    if (createdLeave != null) {
-//                        System.out.println("Leave Created: " + createdLeave.getStartDate() + " - " + createdLeave.getEndDate() + " - " + createdLeave.getDescription() + " - " + createdLeave.getLeaveType());
+//
+//                    Optional<Leave> createdLeave = leaveService.createLeave(leave);
+//
+//                    if (createdLeave.isPresent()) {
+//                        System.out.println("Leave Created: " +
+//                                createdLeave.get().getStartDate() + " - " +
+//                                createdLeave.get().getEndDate() + " - " +
+//                                createdLeave.get().getDescription() + " - " +
+//                                createdLeave.get().getLeaveType());
 //                    } else {
 //                        System.out.println("Leave creation failed.");
 //                    }
@@ -99,5 +121,10 @@ public class Main {
                     System.out.println("Invalid choice.");
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Main app = new Main();
+        app.run();
     }
 }

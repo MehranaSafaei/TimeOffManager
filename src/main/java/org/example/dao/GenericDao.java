@@ -3,7 +3,10 @@ package org.example.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
+import org.example.entity.Personnel;
+
 import java.util.Optional;
+
 
 public abstract class GenericDao<T> {
 
@@ -16,7 +19,7 @@ public abstract class GenericDao<T> {
         this.entityClass = entityClass;
     }
 
-    public void insert(T entity) {
+    public Personnel insert(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -28,6 +31,7 @@ public abstract class GenericDao<T> {
             }
             e.printStackTrace();
         }
+        return null;
     }
 
     public T update(T entity) {

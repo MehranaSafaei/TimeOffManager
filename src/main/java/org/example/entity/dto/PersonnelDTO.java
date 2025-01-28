@@ -1,10 +1,12 @@
 package org.example.entity.dto;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import net.bytebuddy.implementation.bind.annotation.Default;
 
 import java.util.Set;
-
+@Dependent
 public class PersonnelDTO {
 
     private Long id;
