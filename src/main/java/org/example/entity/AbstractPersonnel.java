@@ -14,7 +14,7 @@ public class AbstractPersonnel {
 
     @Id
     @Column(name = "Id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 50)
@@ -33,15 +33,15 @@ public class AbstractPersonnel {
     @Column(name = "Mobile", unique = true, nullable = false)
     private String mobile;
 
-    @Enumerated(EnumType.STRING)
-    private org.example.enums.Role role;
+//    @Enumerated(EnumType.STRING)
+//    private org.example.enums.Role role;
 
     @Size(max = 50)
     @Column(name = "Email")
     private String email;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Leave> leaves;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Leave> leaves;
 
     public AbstractPersonnel() {
     }
@@ -74,12 +74,12 @@ public class AbstractPersonnel {
         this.mobile = mobile;
     }
 
-    public Role getRole() {
-        return role;
-    }
-    public void setRole(org.example.enums.Role role) {
-        this.role = role;
-    }
+//    public Role getRole() {
+//        return role;
+//    }
+//    public void setRole(org.example.enums.Role role) {
+//        this.role = role;
+//    }
 
     public @Size(max = 50) String getEmail() {
         return email;
@@ -88,12 +88,12 @@ public class AbstractPersonnel {
         this.email = email;
     }
 
-    public Set<Leave> getLeaves() {
-        return leaves;
-    }
-    public void setLeaves(Set<Leave> leaves) {
-        this.leaves = leaves;
-    }
+//    public Set<Leave> getLeaves() {
+//        return leaves;
+//    }
+//    public void setLeaves(Set<Leave> leaves) {
+//        this.leaves = leaves;
+//    }
 
     @Override
     public String toString() {
@@ -103,9 +103,9 @@ public class AbstractPersonnel {
 //                ", password='" + password + '\'' +
                 ", personnelCode=" + personnelCode +
                 ", mobile='" + mobile + '\'' +
-                ", role=" + role +
+//                ", role=" + role +
                 ", email='" + email + '\'' +
-                ", leaves=" + leaves +
+//                ", leaves=" + leaves +
                 '}';
     }
 
@@ -114,11 +114,11 @@ public class AbstractPersonnel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPersonnel that = (AbstractPersonnel) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && role == that.role && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, personnelCode, mobile, role, email, leaves);
+        return Objects.hash(id, username, personnelCode, mobile, email);
     }
 }

@@ -13,7 +13,7 @@ public class AbstractLeave {
     //TODO: field
     //TODO:ORM Hibernate-->mapping and column and generate(Table-identity-sequence)---->lazy/eager? cascade orphanRemoval insertable and updatable scale(id)?
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) // because I use postgres
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // because I use postgres
     private Long id;
 
     @Column(name = "StartDate", nullable = false)
