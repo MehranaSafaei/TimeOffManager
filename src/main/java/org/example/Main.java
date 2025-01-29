@@ -1,22 +1,26 @@
 package org.example;
 
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
+
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.Scanner;
+
+import org.example.exception.DuplicateDataException;
+import org.example.exception.SaveRecordException;
 import org.example.service.PersonnelService;
 import org.example.entity.Personnel;
 import org.example.entity.dto.PersonnelDTO;
 
 public class Main {
-    public static void main(String[] args) {
-        Main main = new Main();
-        main.run();
-    }
 
     @Inject
     private PersonnelService personnelService;
 
-    public void run() {
+    public void run() throws SaveRecordException, DuplicateDataException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=== Personnel and Leave Management ===");
@@ -46,7 +50,8 @@ public class Main {
                     personnel.setEmail(email);
                     personnel.setPersonnelCode(personnelCode);
 
-                    personnelService.create(personnel);
+                    personnelService.createPersonnel(personnel);
+
                     break;
 
                 case 2:
@@ -56,5 +61,9 @@ public class Main {
                     System.out.println("Invalid option. Please try again.");
             }
         }
+    }
+    public static void main(String[] args) throws SaveRecordException, DuplicateDataException {
+        Main main = new Main();
+        main.run();
     }
 }

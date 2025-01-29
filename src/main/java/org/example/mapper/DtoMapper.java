@@ -16,8 +16,8 @@ public class DtoMapper {
                 personnel.getId(),
                 personnel.getUsername(),
                 personnel.getEmail(),
-                personnel.getMobile(),
-                personnel.getRole().toString()
+                personnel.getMobile()
+//                personnel.getRole().toString()
         );
     }
 
@@ -26,7 +26,7 @@ public class DtoMapper {
         Personnel personnel = new Personnel();
         personnel.setId(personnelDTO.getId());
         personnel.setUsername(personnelDTO.getUsername());
-        personnel.setRole(org.example.enums.Role.valueOf(personnelDTO.getRole()));
+//        personnel.setRole(org.example.enums.Role.valueOf(personnelDTO.getRole()));
         return personnel;
     }
 

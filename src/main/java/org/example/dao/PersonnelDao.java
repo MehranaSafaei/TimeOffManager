@@ -1,7 +1,5 @@
 package org.example.dao;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -10,10 +8,12 @@ import org.example.entity.Personnel;
 import java.util.List;
 
 
-@ApplicationScoped
+
 public class PersonnelDao extends GenericDao<Personnel> {
 
-    @Inject
+    public long countPersonnelByID;
+
+    @PersistenceContext(unitName = "leaveManagement")
     private EntityManager entityManager;
 
     public PersonnelDao() {
@@ -37,6 +37,16 @@ public class PersonnelDao extends GenericDao<Personnel> {
             e.printStackTrace();
             throw new RuntimeException("Error inserting personnel: " + e.getMessage());
         }
+    }
+
+    public long countPersonnelByCode(long personnelCode) {
+        try {
+            return entityManager.createNamedQuery("?", Long.class)
+                    .setParameter("personnelCode", personnelCode).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0L;
     }
 }
 

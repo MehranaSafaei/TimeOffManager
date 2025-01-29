@@ -18,12 +18,12 @@ public class PersonnelDTO {
 
     private Set<LeaveDTO> leaveId;
 
-    public PersonnelDTO(Long id, @Size(max = 50) String username, String role, String mobile, String email) {
+    public PersonnelDTO(Long id, @Size(max = 50) String username, String mobile, String email) {
         this.id = id;
         this.username = username;
         this.mobile = mobile;
         this.email = email;
-        this.role = role;
+//        this.role = role;
     }
 
     public Long getId() {
