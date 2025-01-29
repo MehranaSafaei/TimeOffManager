@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PersonnelDao extends GenericDao<Personnel> {
 
-    public long countPersonnelByID;
+   /* public long countPersonnelByID;*/
 
     @PersistenceContext(unitName = "leaveManagement")
     private EntityManager entityManager;
@@ -39,7 +39,7 @@ public class PersonnelDao extends GenericDao<Personnel> {
         }
     }
 
-    public long countPersonnelByCode(long personnelCode) {
+   /* public long countPersonnelByCode(long personnelCode) {
         try {
             return entityManager.createNamedQuery("?", Long.class)
                     .setParameter("personnelCode", personnelCode).getSingleResult();
@@ -47,7 +47,7 @@ public class PersonnelDao extends GenericDao<Personnel> {
             e.printStackTrace();
         }
         return 0L;
-    }
+    }*/
 }
 
 //    public PersonnelDao() {

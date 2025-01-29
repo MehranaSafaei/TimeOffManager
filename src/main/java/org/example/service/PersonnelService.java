@@ -37,11 +37,12 @@ public class PersonnelService implements Serializable {
         personnelDao.create(personnel);
     }*/
     private boolean canSavePersonnel(Personnel personnel) throws DuplicateDataException {
-        if(personnelDao.countPersonnelByCode(personnel.getPersonnelCode())==0L){
+        /*if(personnelDao.countPersonnelByID(personnel.getPersonnelCode())==0L){
          return true;
         }else {
             throw new DuplicateDataException();
-        }
+        }*/
+        return true;
     }
     
     @Transactional
@@ -64,10 +65,10 @@ public class PersonnelService implements Serializable {
         return personnel;
     }
 
-    public void create(PersonnelDTO personnelDTO) throws DuplicateDataException {
+    public void create(PersonnelDTO personnelDTO) throws DuplicateDataException, SaveRecordException {
         Personnel personnel = BuildPersonnel(personnelDTO);
         personnel.setId(null);
-        canSavePersonnel(personnel);
+        createPersonnel(personnel);
     }
 
 

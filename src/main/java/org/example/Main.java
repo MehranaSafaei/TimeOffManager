@@ -17,7 +17,7 @@ import org.example.entity.dto.PersonnelDTO;
 
 public class Main {
 
-    @Inject
+    @EJB
     private PersonnelService personnelService;
 
     public void run() throws SaveRecordException, DuplicateDataException {
@@ -25,43 +25,33 @@ public class Main {
 
         System.out.println("=== Personnel and Leave Management ===");
 
-        while (true) {
-            System.out.println("1. Create Personnel");
-            System.out.println("2. Exit");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            /*System.out.println("1. Create Personnel");
+            System.out.println("2. Exit");*/
+        /*int choice = scanner.nextInt();*/
+        scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    System.out.println("** Enter Personnel Information **");
-                    System.out.print("Enter your username: ");
-                    String userName = scanner.nextLine();
-                    System.out.print("Enter your mobile number: ");
-                    String mobile = scanner.nextLine();
-                    System.out.print("Enter your personnel code: ");
-                    long personnelCode = scanner.nextLong();
-                    scanner.nextLine();
-                    System.out.print("Enter your email: ");
-                    String email = scanner.nextLine();
+        System.out.println("** Enter Personnel Information **");
+        System.out.print("Enter your username: ");
+        String userName = scanner.nextLine();
+        System.out.print("Enter your mobile number: ");
+        String mobile = scanner.nextLine();
+        System.out.print("Enter your personnel code: ");
+        long personnelCode = scanner.nextLong();
+        scanner.nextLine();
+        System.out.print("Enter your email: ");
+        String email = scanner.nextLine();
 
-                    Personnel personnel = new Personnel();
-                    personnel.setUsername(userName);
-                    personnel.setMobile(mobile);
-                    personnel.setEmail(email);
-                    personnel.setPersonnelCode(personnelCode);
+        PersonnelDTO personnel = new PersonnelDTO();
+        personnel.setUsername(userName);
+        personnel.setMobile(mobile);
+        personnel.setEmail(email);
+        personnel.setPersonnelCode(personnelCode);
 
-                    personnelService.createPersonnel(personnel);
 
-                    break;
-
-                case 2:
-                    System.out.println("Exiting...");
-                    return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-        }
+        personnelService.create(personnel);
     }
+
+
     public static void main(String[] args) throws SaveRecordException, DuplicateDataException {
         Main main = new Main();
         main.run();

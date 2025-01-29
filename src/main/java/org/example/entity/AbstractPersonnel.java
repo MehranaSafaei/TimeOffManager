@@ -53,24 +53,24 @@ public class AbstractPersonnel {
         this.id = id;
     }
 
-    public @Size(max = 50) String getUsername() {
+    public  String getUsername() {
         return username;
     }
-    public void setUsername(@Size(max = 50) String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public @Size(max = 20) Long getPersonnelCode() {
+    public Long getPersonnelCode() {
         return personnelCode;
     }
-    public void setPersonnelCode(@Size(max = 20) Long personnelCode) {
+    public void setPersonnelCode(Long personnelCode) {
         this.personnelCode = personnelCode;
     }
 
-    public @Size(max = 15) String getMobile() {
+    public String getMobile() {
         return mobile;
     }
-    public void setMobile(@Size(max = 15) String mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -81,10 +81,10 @@ public class AbstractPersonnel {
 //        this.role = role;
 //    }
 
-    public @Size(max = 50) String getEmail() {
+    public String getEmail() {
         return email;
     }
-    public void setEmail(@Size(max = 50) String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

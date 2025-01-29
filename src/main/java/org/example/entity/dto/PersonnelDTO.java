@@ -1,5 +1,6 @@
 package org.example.entity.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -18,7 +19,10 @@ public class PersonnelDTO {
 
     private Set<LeaveDTO> leaveId;
 
-    public PersonnelDTO(Long id, @Size(max = 50) String username, String mobile, String email) {
+    public PersonnelDTO() {
+    }
+
+    public PersonnelDTO(Long id, /*@Size(max = 50)*/ String username, String mobile, String email) {
         this.id = id;
         this.username = username;
         this.mobile = mobile;
@@ -33,7 +37,7 @@ public class PersonnelDTO {
         this.id = id;
     }
 
-    @Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")
+    /*@Pattern(regexp = "^[a-zA-Z0-9._-]{3,20}$", message = "username must be 3-20 character long")*/
     public String getUsername() {
         return username;
     }
@@ -41,7 +45,7 @@ public class PersonnelDTO {
         this.username = username;
     }
 
-    @Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character")
+    /*@Pattern(regexp = "^[a-zA-Z0-9._\\-~\\?!@#\\$%\\^&\\*\\(\\)]{8,20}$", message = "password must be 8-20 character")*/
     public String getPassword() {
         return password;
     }
@@ -49,7 +53,7 @@ public class PersonnelDTO {
         this.password = password;
     }
 
-    @Pattern(regexp = "[0-9]{5,10}$")
+   /* @Pattern(regexp = "[0-9]{5,10}$")*/
     public Long getPersonnelCode() {
         return personnelCode;
     }
@@ -57,7 +61,7 @@ public class PersonnelDTO {
         this.personnelCode = personnelCode;
     }
 
-    @Pattern(regexp = "[0-9]{5,10}$")
+   /* @Pattern(regexp = "[0-9]{5,10}$")*/
     public String getMobile() {
         return mobile;
     }
@@ -65,7 +69,7 @@ public class PersonnelDTO {
         this.mobile = mobile;
     }
 
-    @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")
+   /* @Pattern(regexp = "[\\w.%+-]+@[\\w.-]+[a-zA-Z]{3,6}$")*/
     public String getEmail() {
         return email;
     }
