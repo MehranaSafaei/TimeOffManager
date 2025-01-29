@@ -1,33 +1,31 @@
 package org.example.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.example.dao.PersonnelDao;
 import org.example.entity.Personnel;
-import org.example.entity.dto.PersonnelDTO;
-import org.example.mapper.DtoMapper;
 
 import java.io.Serializable;
-import java.util.Optional;
 
-@SessionScoped
+@ApplicationScoped
 public class PersonnelService implements Serializable {
     @Inject
     private PersonnelDao personnelDao;
 
-    public Optional<PersonnelDTO> createPersonnel(Personnel personnel) {
-        try {
-            if (personnelDao == null) {
-                throw new IllegalStateException("PersonnelDAO is not injected");
-            }
-            Personnel savedPersonnel = personnelDao.insert(personnel);
-            PersonnelDTO personnelDTO = DtoMapper.entityToDTO(savedPersonnel);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Transactional
+    public void create(Personnel personnelDTO) {
+        if (personnelDTO == null) {
+            throw new IllegalArgumentException("PersonnelDTO cannot be null");
         }
-        return null;
+
+        Personnel personnel = new Personnel();
+        personnel.setMobile(personnelDTO.getMobile());
+        personnel.setPersonnelCode(personnelDTO.getPersonnelCode());
+        personnel.setEmail(personnelDTO.getEmail());
+        personnel.setUsername(personnelDTO.getUsername());
+
+        personnelDao.create(personnel);
     }
 
 

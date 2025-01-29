@@ -1,18 +1,19 @@
 package org.example.dao;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.example.entity.Personnel;
 
-import java.io.Serializable;
 import java.util.List;
 
-@SessionScoped
-public class PersonnelDao extends GenericDao<Personnel> implements Serializable {
 
-    @PersistenceContext
+@ApplicationScoped
+public class PersonnelDao extends GenericDao<Personnel> {
+
+    @Inject
     private EntityManager entityManager;
 
     public PersonnelDao() {
@@ -28,14 +29,14 @@ public class PersonnelDao extends GenericDao<Personnel> implements Serializable 
         }
     }
 
-    @Override
-    public Personnel insert(Personnel entity) {
+    @Transactional
+    public void create(Personnel entity) {
         try {
             entityManager.persist(entity);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Error inserting personnel: " + e.getMessage());
         }
-        return entity;
     }
 }
 

@@ -1,12 +1,9 @@
 package org.example.dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
-import org.example.entity.Personnel;
-
+import jakarta.transaction.Transactional;
 import java.util.Optional;
-
 
 public abstract class GenericDao<T> {
 
@@ -19,50 +16,35 @@ public abstract class GenericDao<T> {
         this.entityClass = entityClass;
     }
 
-    public Personnel insert(T entity) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    @Transactional
+    public T insert(T entity) {
         try {
-            transaction.begin();
             entityManager.persist(entity);
-            transaction.commit();
+            return entity;
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public T update(T entity) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            T updatedEntity = entityManager.merge(entity);
-            transaction.commit();
-            return updatedEntity;
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
             e.printStackTrace();
             return null;
         }
     }
 
-    public void delete(long id) {
-        EntityTransaction transaction = entityManager.getTransaction();
+    @Transactional
+    public T update(T entity) {
         try {
-            transaction.begin();
+            return entityManager.merge(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Transactional
+    public void delete(long id) {
+        try {
             T entity = entityManager.find(entityClass, id);
             if (entity != null) {
                 entityManager.remove(entity);
             }
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
     }
@@ -71,5 +53,4 @@ public abstract class GenericDao<T> {
         T entity = entityManager.find(entityClass, id);
         return Optional.ofNullable(entity);
     }
-
 }
