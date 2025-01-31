@@ -1,23 +1,23 @@
 package org.example;
 
+import com.mysql.cj.protocol.a.authentication.AuthenticationOciClient;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.Scanner;
-
+import jakarta.inject.Inject;
+import org.example.entity.dto.PersonnelDTO;
 import org.example.exception.DuplicateDataException;
 import org.example.exception.SaveRecordException;
 import org.example.service.PersonnelService;
-import org.example.entity.Personnel;
-import org.example.entity.dto.PersonnelDTO;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 
+import java.util.Scanner;
+@ApplicationScoped
 public class Main {
 
-    @EJB
+    @Inject
     private PersonnelService personnelService;
 
     public void run() throws SaveRecordException, DuplicateDataException {
@@ -25,9 +25,6 @@ public class Main {
 
         System.out.println("=== Personnel and Leave Management ===");
 
-            /*System.out.println("1. Create Personnel");
-            System.out.println("2. Exit");*/
-        /*int choice = scanner.nextInt();*/
         scanner.nextLine();
 
         System.out.println("** Enter Personnel Information **");
@@ -47,13 +44,17 @@ public class Main {
         personnel.setEmail(email);
         personnel.setPersonnelCode(personnelCode);
 
-
         personnelService.create(personnel);
     }
 
-
     public static void main(String[] args) throws SaveRecordException, DuplicateDataException {
-        Main main = new Main();
+        Weld weld = new Weld();
+        WeldContainer container = weld.initialize();
+
+        Main main = container.select(Main.class).get();
         main.run();
+
+        container.shutdown();
     }
 }
+

@@ -1,15 +1,17 @@
 package org.example.dao;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.example.entity.Personnel;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-
-public class PersonnelDao extends GenericDao<Personnel> {
+@SessionScoped
+public class PersonnelDao extends GenericDao<Personnel> implements Serializable {
 
    /* public long countPersonnelByID;*/
 

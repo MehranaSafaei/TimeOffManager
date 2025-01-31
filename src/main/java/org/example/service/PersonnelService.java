@@ -15,7 +15,7 @@ import org.example.exception.SaveRecordException;
 
 import java.io.Serializable;
 
-@Stateless
+@SessionScoped
 public class PersonnelService implements Serializable {
 
     @Inject
