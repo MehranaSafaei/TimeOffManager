@@ -12,29 +12,19 @@ public class AbstractLeave {
 
     //TODO: field
     //TODO:ORM Hibernate-->mapping and column and generate(Table-identity-sequence)---->lazy/eager? cascade orphanRemoval insertable and updatable scale(id)?
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // because I use postgres
+
     private Long id;
-
-    @Column(name = "StartDate", nullable = false)
     private LocalDate startDate;
-
-    @Column(name = "EndDate", nullable = false)
     private LocalDate endDate;
-
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personnel_id", foreignKey = @ForeignKey(name = "fk_personnel_leave"))
     private Personnel personnel;
-
-    @Column(name = "LeaveType")
-    @Enumerated(EnumType.STRING)
     private LeaveType leaveType;
 
     public AbstractLeave() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY  ) // because I use postgres
     public Long getId() {
         return id;
     }
@@ -42,6 +32,7 @@ public class AbstractLeave {
         this.id = id;
     }
 
+    @Column(name = "StartDate", nullable = false)
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -49,6 +40,7 @@ public class AbstractLeave {
         this.startDate = startDate;
     }
 
+    @Column(name = "EndDate", nullable = false)
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -56,6 +48,7 @@ public class AbstractLeave {
         this.endDate = endDate;
     }
 
+    @Column(name = "Description")
     public String getDescription() {
         return description;
     }
@@ -63,6 +56,8 @@ public class AbstractLeave {
         this.description = description;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personnel_id", foreignKey = @ForeignKey(name = "fk_personnel_leave"))
     public Personnel getPersonnel() {
         return personnel;
     }
@@ -70,6 +65,8 @@ public class AbstractLeave {
         this.personnel = personnel;
     }
 
+    @Column(name = "LeaveType")
+    @Enumerated(EnumType.STRING)
     public LeaveType getLeaveType() {
         return leaveType;
     }

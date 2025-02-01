@@ -1,10 +1,7 @@
 package org.example.service;
 
-import jakarta.ejb.EJB;
-import jakarta.ejb.LocalBean;
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.example.dao.PersonnelDao;
@@ -15,27 +12,12 @@ import org.example.exception.SaveRecordException;
 
 import java.io.Serializable;
 
-@SessionScoped
+@ApplicationScoped
 public class PersonnelService implements Serializable {
 
-    @Inject
-    private PersonnelDao personnelDao;
+//    @Inject
+    private PersonnelDao personnelDao = new PersonnelDao();
 
-    /*@Transactional
-    public void create(Personnel personnelDTO) {
-        if (personnelDTO == null) {
-            throw new IllegalArgumentException("PersonnelDTO cannot be null");
-        }
-
-        Personnel personnel = new Personnel();
-        personnel.setId(personnelDTO.getId());
-        personnel.setMobile(personnelDTO.getMobile());
-        personnel.setPersonnelCode(personnelDTO.getPersonnelCode());
-        personnel.setEmail(personnelDTO.getEmail());
-        personnel.setUsername(personnelDTO.getUsername());
-
-        personnelDao.create(personnel);
-    }*/
     private boolean canSavePersonnel(Personnel personnel) throws DuplicateDataException {
         /*if(personnelDao.countPersonnelByID(personnel.getPersonnelCode())==0L){
          return true;

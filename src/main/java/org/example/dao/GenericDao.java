@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public abstract class GenericDao<T> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "leaveManagement")
     protected EntityManager entityManager;
 
     private final Class<T> entityClass;
@@ -16,10 +16,11 @@ public abstract class GenericDao<T> {
         this.entityClass = entityClass;
     }
 
-    @Transactional
-    public T insert(T entity) {
+    public T create(T entity) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(entity);
+            entityManager.getTransaction().commit();
             return entity;
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,10 +28,12 @@ public abstract class GenericDao<T> {
         }
     }
 
-    @Transactional
     public T update(T entity) {
         try {
-            return entityManager.merge(entity);
+            entityManager.getTransaction().begin();
+            entityManager.merge(entity);
+            entityManager.getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

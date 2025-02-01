@@ -1,26 +1,21 @@
 package org.example;
 
-import com.mysql.cj.protocol.a.authentication.AuthenticationOciClient;
-import jakarta.ejb.EJB;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import org.example.entity.dto.PersonnelDTO;
 import org.example.exception.DuplicateDataException;
 import org.example.exception.SaveRecordException;
 import org.example.service.PersonnelService;
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
 
 import java.util.Scanner;
-@ApplicationScoped
+
+@RequestScoped
 public class Main {
 
-    @Inject
-    private PersonnelService personnelService;
 
-    public void run() throws SaveRecordException, DuplicateDataException {
+    public static void main(String[] args) throws SaveRecordException, DuplicateDataException {
+        PersonnelService personnelService = new PersonnelService();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=== Personnel and Leave Management ===");
@@ -46,15 +41,9 @@ public class Main {
 
         personnelService.create(personnel);
     }
-
-    public static void main(String[] args) throws SaveRecordException, DuplicateDataException {
-        Weld weld = new Weld();
-        WeldContainer container = weld.initialize();
-
-        Main main = container.select(Main.class).get();
-        main.run();
-
-        container.shutdown();
-    }
 }
+
+
+
+
 

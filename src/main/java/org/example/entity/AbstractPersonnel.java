@@ -12,40 +12,21 @@ public class AbstractPersonnel {
     //TODO: field
     //TODO:ORM Hibernate-->mapping and column and generate(Table-identity-sequence)---->lazy/eager? cascade orphanRemoval insertable and updatable scale(id)?
 
-    @Id
-    @Column(name = "Id", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-
-    @Size(max = 50)
-    @Column(name = "Username", unique = true)
     private String username;
-
-//    @Size(max = 50)
-//    @Column(name = "Password", unique = true, updatable = true)
-//    private String password;
-
-    @Size(max = 20)
-    @Column(name = "PersonnelCode", unique = true, nullable = false)
     private Long personnelCode;
-
-    @Size(max = 15)
-    @Column(name = "Mobile", unique = true, nullable = false)
     private String mobile;
-
-//    @Enumerated(EnumType.STRING)
-//    private org.example.enums.Role role;
-
-    @Size(max = 50)
-    @Column(name = "Email")
     private String email;
-//
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<Leave> leaves;
+    private Set<Leave> leaves;
+
 
     public AbstractPersonnel() {
     }
 
+    @Id
+    @Column(name = "Id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -53,6 +34,8 @@ public class AbstractPersonnel {
         this.id = id;
     }
 
+    @Size(max = 50)
+    @Column(name = "Username", unique = true)
     public  String getUsername() {
         return username;
     }
@@ -60,6 +43,8 @@ public class AbstractPersonnel {
         this.username = username;
     }
 
+    @Size(max = 20)
+    @Column(name = "PersonnelCode", unique = true, nullable = false)
     public Long getPersonnelCode() {
         return personnelCode;
     }
@@ -67,6 +52,8 @@ public class AbstractPersonnel {
         this.personnelCode = personnelCode;
     }
 
+    @Size(max = 15)
+    @Column(name = "Mobile", unique = true, nullable = false)
     public String getMobile() {
         return mobile;
     }
@@ -74,13 +61,8 @@ public class AbstractPersonnel {
         this.mobile = mobile;
     }
 
-//    public Role getRole() {
-//        return role;
-//    }
-//    public void setRole(org.example.enums.Role role) {
-//        this.role = role;
-//    }
-
+    @Size(max = 50)
+    @Column(name = "Email")
     public String getEmail() {
         return email;
     }
@@ -88,12 +70,15 @@ public class AbstractPersonnel {
         this.email = email;
     }
 
-//    public Set<Leave> getLeaves() {
-//        return leaves;
-//    }
-//    public void setLeaves(Set<Leave> leaves) {
-//        this.leaves = leaves;
-//    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "personnel_id")
+    public Set<Leave> getLeave() {
+        return leaves;
+    }
+    public void setLeave(Set<Leave> leaves) {
+        this.leaves = leaves;
+    }
 
     @Override
     public String toString() {
@@ -114,11 +99,11 @@ public class AbstractPersonnel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPersonnel that = (AbstractPersonnel) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) ;
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(leave, that.leaves) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, personnelCode, mobile, email);
+        return Objects.hash(id, username, personnelCode, mobile, email, leaves);
     }
 }
