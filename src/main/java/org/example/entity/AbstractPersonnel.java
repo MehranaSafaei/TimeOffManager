@@ -99,7 +99,7 @@ public class AbstractPersonnel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPersonnel that = (AbstractPersonnel) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(leave, that.leaves) ;
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) &&  Objects.equals(personnelCode, that.personnelCode) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(leaves, that.leaves) ;
     }
 
     @Override
