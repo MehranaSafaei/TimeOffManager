@@ -16,9 +16,6 @@ import java.util.List;
 @ApplicationScoped
 public class PersonnelDao extends GenericDao<Personnel> implements Serializable {
 
-    @Inject
-    private EntityManager entityManager;
-
     public PersonnelDao() {
         super(Personnel.class);
     }
