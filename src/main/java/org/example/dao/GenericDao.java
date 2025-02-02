@@ -1,30 +1,31 @@
 package org.example.dao;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
 
-public abstract class GenericDao<T> {
+//@Dependent
+public class GenericDao<T> {
 
-    @PersistenceContext(unitName = "leaveManagement")
+    @PersistenceContext(unitName = "PersonnelUnit")
     protected EntityManager entityManager;
 
     private final Class<T> entityClass;
 
+    @Inject
     public GenericDao(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
-    public T create(T entity) {
+    @Transactional
+    public void create(T entity) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(entity);
-            entityManager.getTransaction().commit();
-            return entity;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 

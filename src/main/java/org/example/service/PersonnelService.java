@@ -4,7 +4,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.example.dao.GenericDao;
 import org.example.dao.PersonnelDao;
+import org.example.dao.PersonnelRepo;
 import org.example.entity.Personnel;
 import org.example.entity.dto.PersonnelDTO;
 import org.example.exception.DuplicateDataException;
@@ -12,11 +14,11 @@ import org.example.exception.SaveRecordException;
 
 import java.io.Serializable;
 
-@ApplicationScoped
+@RequestScoped
 public class PersonnelService implements Serializable {
 
-//    @Inject
-    private PersonnelDao personnelDao = new PersonnelDao();
+    @Inject
+    private PersonnelDao personnelDao;
 
     private boolean canSavePersonnel(Personnel personnel) throws DuplicateDataException {
         /*if(personnelDao.countPersonnelByID(personnel.getPersonnelCode())==0L){

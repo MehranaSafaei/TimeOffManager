@@ -14,7 +14,6 @@ public class PersonnelDTO {
     private Long personnelCode;
     private String mobile;
     private String email;
-    private String role;
 
 
     private Set<LeaveDTO> leaveId;
@@ -77,12 +76,12 @@ public class PersonnelDTO {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    public String getRole() {
+//        return role;
+//    }
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     public Set<LeaveDTO> getLeaveId() {
         return leaveId;

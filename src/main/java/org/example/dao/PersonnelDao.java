@@ -1,7 +1,9 @@
 package org.example.dao;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -11,10 +13,10 @@ import java.io.Serializable;
 import java.util.List;
 
 
-@RequestScoped
+@ApplicationScoped
 public class PersonnelDao extends GenericDao<Personnel> implements Serializable {
 
-    @PersistenceContext(unitName = "leaveManagement")
+    @Inject
     private EntityManager entityManager;
 
     public PersonnelDao() {
